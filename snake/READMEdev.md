@@ -44,11 +44,11 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
+**Compatibility:**
+* Changed project structure from Visual Studio to CMake.
+
 **Minor:**
-* You can use B to go back to the main menu from the settings and leaderboard menu.
-* * You can also use Right Control + B to go back to main menu during a game. This will lose progress, and the highscore wont be saved.
-* Added buttons to leaderboard menu.
-* Now the leaderboard menu shows the current listed highscores.
+* Changes to versioning.
 
 ## Versioning:
 
@@ -56,7 +56,7 @@ Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
 
 Version flags:
 
-* COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
+* COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions. May also be increased when a major update to the backend happens, or if the project structure (on the programmers end) majorly changes.
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
 * MINOR - Incremented if added small to medium features in existing systems, or if they were reworked. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 * PATCH - No new features, just bug fixes.

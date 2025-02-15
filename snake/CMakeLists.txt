@@ -17,4 +17,9 @@ add_executable(${PROJECT_NAME}
     source/mainheader.h
     source/mainmenuheader.h)
 
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML/lib)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML/include)
+
 add_subdirectory(tinyfiledialogs)
+target_link_libraries(${PROJECT_NAME} tinyfiledialogs)
