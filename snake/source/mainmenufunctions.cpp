@@ -1,5 +1,5 @@
 #include "mainheader.h"
-#include "tinyfiledialogs.h"
+#include "../tinyfiledialogs/tinyfiledialogs.h"
 
 int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames, int currentscore, std::string namefromround)
 {
