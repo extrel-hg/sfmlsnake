@@ -44,12 +44,6 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Compatibility:**
-* Changed project structure from Visual Studio to CMake.
-
-**Minor:**
-* Changes to README and versioning.
-
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)

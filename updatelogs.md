@@ -1,9 +1,16 @@
 # Previous update notes:
 
+## V2.0.0.0
+*15.02.2025*
+
+**Compatibility:**
+* Changed project structure from Visual Studio to CMake.
+
+**Minor:**
+* Changes to README and versioning.
+
 ## V1.3.1.0
 *19.11.2024*
-
-## Update notes:
 
 **Minor:**
 * You can use B to go back to the main menu from the settings and leaderboard menu.
