@@ -48,7 +48,7 @@ If that setting is set to "Yes", pressing space will use the default name, while
 * Changed project structure from Visual Studio to CMake.
 
 **Minor:**
-* Changes to versioning.
+* Changes to README and versioning.
 
 ## Versioning:
 
@@ -88,16 +88,15 @@ www.github.com/Kimoworwa
 ## Building the game yourself
 
 ### SFML
-This version uses 2.6.1 SFML for Visual Studio 2022, 32-bit.
+This version uses SFML 2.6.2. Download the SFML libary either for linux or windows, depending on which one you are using.
 
-Link and include it properly in your IDE (or VS).
+The CMakeLists.txt file should automatically link and include any SFML version, that is present in the snake/SFML folder. The SFML folder should contain include, lib and share folders.
 
 ### tinyfiledialogs
-This version uses tinyfiledialogs v3.18.2.
-Download it from www.sourceforge.net/projects/tinyfiledialogs.
-In your IDE include the tinyfiledialogs.h, and link the tinyfiledialogs.c.
+This version uses tinyfiledialogs v3.19.1.
+
+This libary is already present in this repo, you don't need to download it. It is cross-platform, so no need to change from Windows to Linux version of the library, or vice versa.
 
 
 ### Notice
-Bear in mind I am very much a beginner in terms of installing libraries manually, and I may have got the terminology somewhere wrong.
-But since I somehow figured it out, you can too.
+I am a beginner and self-taught game developer. If anything I've written is inconcise, or any term I've used it not proper, I am sorry. I am still learning.
