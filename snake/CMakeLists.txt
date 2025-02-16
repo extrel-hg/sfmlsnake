@@ -37,3 +37,9 @@ endif (WIN64)
 if (UNIX)
     install(FILES )
 endif (UNIX) # Set to include either .so or .dll files
+
+###TO DO:
+# Automatically include Readme.md
+# automatically include updatelogs.md
+# automatically include proper .so or .dll files, depending on what system we are compiling on/for
+# make a cmake configure variable for the current date and version number, and use it everywhere from here instead of using it manually everywhere
