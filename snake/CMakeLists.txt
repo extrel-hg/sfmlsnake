@@ -18,17 +18,22 @@ add_executable(${PROJECT_NAME}
     source/mainmenuheader.h
 )
 
-#set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH $ORIGIN)
-#set(_rpath_portable_origin $ORIGIN)
-
 set_property(TARGET ${PROJECT_NAME} PROPERTY INSTALL_RPATH $ORIGIN)
 
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
 target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML/lib)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML/include)
+
+set(DCMAKE_INSTALL_PREFIX:PATH=.)
 
 add_subdirectory(tinyfiledialogs)
 target_link_libraries(${PROJECT_NAME} tinyfiledialogs)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-include(CPack)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION snake)
+install(DIRECTORY rsc DESTINATION snake)
+if (WIN64)
+    # do something
+endif (WIN64)
+if (UNIX)
+    install(FILES )
+endif (UNIX) # Set to include either .so or .dll files
