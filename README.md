@@ -1,4 +1,4 @@
-# V2.0.0.0 - 15.02.2025
+# V2.0.1.0 - 16.02.2025
 By Hubert Gonera
 
 ## Welcome
@@ -26,11 +26,11 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Compatibility:**
-* Changed project structure from Visual Studio to CMake.
-
 **Minor:**
-* Changes to README and versioning.
+* Settings and highscores are updated from the text files during each change of menu. This is only made, so that if multiple people change the text files, you should always have the most up to date data from the text files.
+
+**Patch:**
+* Removed any limits regarding the choice of resoultions. This is because of inconsistencies between Linux and Windows machines, and general unwieldiness of that system. If you accidently select any setting that makes it impossible to change back to one that works, you can press R while in the save menu, that will reset the window to 800x600 fullscreen.
 
 ## Versioning:
 

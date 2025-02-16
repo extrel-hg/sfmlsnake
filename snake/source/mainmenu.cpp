@@ -35,71 +35,18 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 	std::vector < std::pair<int, std::string>> highscores;
 	std::vector <std::string> highscorenames;
+
+	if (loadhighscores(highscores, highscorenames) == -1)
 	{
-		std::vector<std::string> defaultsettings = { "800","600","0","0","placeholder","1" };
-		if (loadhighscores(highscores, highscorenames) == -1)
+		return -1;
+	}
+	savehighscoredata(highscores);
+
+	{
+		int loadsettingsretcode = loadsettings(screenreswidth,screenresheight,fullscreen,defaultplayername,askforcustomnameafteraround,visitedsettingsyet);
+		if(loadsettingsretcode == -1)
 		{
-			return -1;
-		}
-		savehighscoredata(highscores);
-
-		{ //set.txt
-			std::vector<std::string> loadeddata = loadfromtxt("set.txt");
-			if (loadeddata[0] == "ERROR")
-			{
-				savetotxt(defaultsettings, "set.txt"); //default settings ig
-			}
-			else {
-
-				std::vector<int> checkfields = { 0,1,2,3,5 };
-
-				std::vector<std::pair<int, int>> ranges;
-				ranges.resize(loadeddata.size());
-
-				ranges = { {400,7680},{300,4320},{0,1},{0,1},{-69,69},{0,1} };
-
-				for (int i = 0; i < checkfields.size(); i++)
-				{
-					if (!is_int(loadeddata[checkfields[i]]))
-					{
-						if (errorboxyesno("Corrupted set.txt file.", "Data in set.txt is corrupted, and contains letters in places it should not. You can attempt to fix it manually. Do you want to reset to defaults?") == 1)
-						{
-							loadeddata = defaultsettings;
-							savetotxt(loadeddata, "set.txt");
-						}
-						else {
-							return -1;
-						}
-					}
-				}
-
-				for (int i = 0; i < ranges.size(); i++)
-				{
-					if (ranges[i].first == -69 && ranges[i].second == 69)
-					{
-						continue;
-					}
-					else {
-						if (std::stoi(loadeddata[i]) < ranges[i].first || std::stoi(loadeddata[i]) > ranges[i].second)
-						{
-							if (errorboxyesno("Corrupted set.txt file.", "Data in set.txt is corrupted, certain values are outside the range they are supposed to be. You can attempt to fix it manually. Do you want to reset to defaults?") == 1)
-							{
-								loadeddata = defaultsettings;
-								savetotxt(loadeddata, "set.txt");
-							}
-							else {
-								return -1;
-							}
-						}
-					}
-				}
-				screenreswidth = std::stoi(loadeddata[0]);
-				screenresheight = std::stoi(loadeddata[1]);
-				fullscreen = std::stoi(loadeddata[2]);
-				visitedsettingsyet = std::stoi(loadeddata[3]);
-				defaultplayername = loadeddata[4];
-				askforcustomnameafteraround = std::stoi(loadeddata[5]);
-			}
+			errorbox("Error loading settings.", "Error while loading the settings. Try reinstalling your game, or fixing the set.txt file manually.");
 		}
 	}
 
@@ -239,16 +186,31 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					quit = true;
 				}
+				{
+					int loadsettingsretcode = loadsettings(screenreswidth,screenresheight,fullscreen,defaultplayername,askforcustomnameafteraround,visitedsettingsyet);
+					if(loadsettingsretcode == -1)
+					{
+						errorbox("Error loading settings.", "Error while loading the settings. Try reinstalling your game, or fixing the set.txt file manually.");
+					}
+				}
 			}
 
 			if (leaderboard)
 			{
+				loadhighscores(highscores, highscorenames);
 				int leaderboardretcode = leaderboardmenu(gamewindow, font, highscores, highscorenames);
 				if (leaderboardretcode == 0)
 				{
 					quit = true;
 				}
-				
+				loadhighscores(highscores, highscorenames);
+				{
+					int loadsettingsretcode = loadsettings(screenreswidth,screenresheight,fullscreen,defaultplayername,askforcustomnameafteraround,visitedsettingsyet);
+					if(loadsettingsretcode == -1)
+					{
+						errorbox("Error loading settings.", "Error while loading the settings. Try reinstalling your game, or fixing the set.txt file manually.");
+					}
+				}
 			}
 
 			if (settings)
@@ -260,6 +222,14 @@ int mainmenu(sf::RenderWindow& gamewindow)
 					quit = true;
 				}
 				recalculate = true;
+				loadhighscores(highscores, highscorenames);
+				{
+					int loadsettingsretcode = loadsettings(screenreswidth,screenresheight,fullscreen,defaultplayername,askforcustomnameafteraround,visitedsettingsyet);
+					if(loadsettingsretcode == -1)
+					{
+						errorbox("Error loading settings.", "Error while loading the settings. Try reinstalling your game, or fixing the set.txt file manually.");
+					}
+				}
 			}
 
 			if (quit)
