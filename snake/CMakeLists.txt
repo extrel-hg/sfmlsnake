@@ -5,6 +5,8 @@ project(sfmlsnake)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
+set(windows false)
+
 add_executable(${PROJECT_NAME}
     source/gameloop.cpp
     source/gameloopgetplayername.cpp
@@ -29,14 +31,26 @@ set(DCMAKE_INSTALL_PREFIX:PATH=.)
 add_subdirectory(tinyfiledialogs)
 target_link_libraries(${PROJECT_NAME} tinyfiledialogs)
 
+set(CMAKE_INSTALL_PREFIX .)
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION snake)
 install(DIRECTORY rsc DESTINATION snake)
-if (WIN64)
-    # do something
-endif (WIN64)
-if (UNIX)
-    install(FILES )
-endif (UNIX) # Set to include either .so or .dll files
+
+# Automatically put proper .so or .dll files in the install directory. This is not automated, and requires the dev to name the SFML folder "SFML".
+# However, as this is a small project, and I am not planning to add more libraries (apart from  sfml-audio), or update to SFML 3.0.0, I reckon this is fine.
+# This could be automated by checking what libraries my exe needs, and pulling that list, and putting it here, but this is easier.
+# I am doing this since this only concerns the installation process, not any build processes.
+if(windows)
+    message(STATUS "Set to Windows")
+    install(FILES SFML/bin/sfml-system-2.dll DESTINATION snake)
+    install(FILES SFML/bin/sfml-window-2.dll DESTINATION snake)
+    install(FILES SFML/bin/sfml-graphics-2.dll DESTINATION snake)
+endif(windows)
+if(NOT windows)
+    message(STATUS "Set to Linux")
+    install(FILES SFML/lib/libsfml-system.so.2.6.2 DESTINATION snake RENAME libsfml-system.so.2.6)
+    install(FILES SFML/lib/libsfml-window.so.2.6.2 DESTINATION snake RENAME libsfml-window.so.2.6)
+    install(FILES SFML/lib/libsfml-graphics.so.2.6.2 DESTINATION snake RENAME libsfml-graphics.so.2.6)
+endif(NOT windows)
 
 ###TO DO:
 # Automatically include Readme.md
