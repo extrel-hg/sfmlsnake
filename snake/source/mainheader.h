@@ -8,7 +8,7 @@
 #include <vector>
 #include <cmath>
 
-const std::string versiontag = "V2.0.1.1";
+const std::string versiontag = "V2.0.1.2";
 const std::string builddate = "17.02.2025";
 
 extern int screenreswidth;

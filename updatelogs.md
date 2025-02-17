@@ -1,5 +1,12 @@
 # Previous update notes:
 
+## V2.0.1.2
+*17.02.2025*
+
+**Patch:**
+* Made changes to CMakeLists.txt so that the resulting app has RPATH set to origin. This will allow the application to check for .so files in its own install directory. This means the user does not need to install SFML 2.6.2, because I will be shipping the required .so files with my game.
+* Further changes to CMakeLists.txt that automate the build process.
+
 ## V2.0.1.1
 *17.02.2025*
 

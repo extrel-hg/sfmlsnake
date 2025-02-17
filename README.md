@@ -1,4 +1,4 @@
-# V2.0.1.1 - 17.02.2025
+# V2.0.1.2 - 17.02.2025
 By Hubert Gonera
 
 ## Welcome
@@ -28,6 +28,7 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 **Patch:**
 * Made changes to CMakeLists.txt so that the resulting app has RPATH set to origin. This will allow the application to check for .so files in its own install directory. This means the user does not need to install SFML 2.6.2, because I will be shipping the required .so files with my game.
+* Further changes to CMakeLists.txt that automate the build process.
 
 ## Versioning:
 
