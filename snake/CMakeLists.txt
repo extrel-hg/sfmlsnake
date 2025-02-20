@@ -5,8 +5,8 @@ project(sfmlsnake)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-set(INCLUDEDLLS)
-set(SFMLVERSION "SFML-2.6.2")
+set(SFMLFOLDER "SFML-2.6.2")
+set(INCLUDEDLLS true)
 
 add_executable(${PROJECT_NAME}
     source/gameloop.cpp
@@ -21,16 +21,36 @@ add_executable(${PROJECT_NAME}
     source/mainmenuheader.h
 )
 
-target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLVERSION}/lib)
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLVERSION}/include)
+if(INCLUDEDLLS)
+    message(STATUS "Including .dlls (we are working on windows)")
+	
+	##You need to build SFML .dll's and .a's using the same compiler, that you will use during building of the game.
+	##I use MinGW Makefiles everywhere on Windows, so I am building SFML with them as well. Then I build my game with it.
+	##Building SFML is easy. Download source code, and build using CMake as normal. Inside of the build/lib folder are the resulting .dll and .a files.
+	##The resulting built library put into SFML-BUILTLIBS.
+	##After that, you can delete the build folder. Keep the whole SFML-2.6.2 folder though, as we need that for include (see below)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-system-2.dll DESTINATION finishedsnake)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-window-2.dll DESTINATION finishedsnake)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-graphics-2.dll DESTINATION finishedsnake)
+	target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/)
+	target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/include)
+	
+	target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
+	target_sources(${PROJECT_NAME} PRIVATE source/icon.rc)
+	##Those two lines disable opening of console, and the adding of icon.rc to sources sets the icon
+endif(INCLUDEDLLS)
 
-#temp
-if(WIN32)
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/mingw64/include)
-set(CMAKE_C_COMPILER ${CMAKE_CURRENT_SOURCE_DIR}/mingw64bin//gcc.exe)
-set(CMAKE_CXX_COMPILER ${CMAKE_CURRENT_SOURCE_DIR}/mingw64/bin/g++.exe)
-endif(WIN32)
+if(NOT INCLUDEDLLS)
+    message(STATUS "Including .so (we are working on linux)")
+	
+    install(FILES ${SFMLFOLDER}/lib/libsfml-system.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-system.so.2.6)
+    install(FILES ${SFMLFOLDER}/lib/libsfml-window.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-window.so.2.6)
+    install(FILES ${SFMLFOLDER}/lib/libsfml-graphics.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-graphics.so.2.6)
+	target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/lib)
+	target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/include)
+endif(NOT INCLUDEDLLS)
+
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
 
 add_subdirectory(tinyfiledialogs)
 target_link_libraries(${PROJECT_NAME} tinyfiledialogs)
@@ -41,17 +61,3 @@ install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION finishedsnake)
 install(DIRECTORY rsc DESTINATION finishedsnake)
 install(FILES ../README.md DESTINATION finishedsnake)
 install(FILES ../updatelogs.md DESTINATION finishedsnake)
-
-if(INCLUDEDLLS)
-    message(STATUS "Including .dlls")
-    install(FILES ${SFMLVERSION}/bin/sfml-system-2.dll DESTINATION finishedsnake)
-    install(FILES ${SFMLVERSION}/bin/sfml-window-2.dll DESTINATION finishedsnake)
-    install(FILES ${SFMLVERSION}/bin/sfml-graphics-2.dll DESTINATION finishedsnake)
-endif(INCLUDEDLLS)
-
-if(NOT INCLUDEDLLS)
-    message(STATUS "Including .so")
-    install(FILES ${SFMLVERSION}/lib/libsfml-system.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-system.so.2.6)
-    install(FILES ${SFMLVERSION}/lib/libsfml-window.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-window.so.2.6)
-    install(FILES ${SFMLVERSION}/lib/libsfml-graphics.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-graphics.so.2.6)
-endif(NOT INCLUDEDLLS)
