@@ -34,7 +34,6 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 	bool quitfull = false;
 	bool drawresolutionchoices = false;
 
-
 	Button backtomenubutton(font, "Back to menu");
 	Button fullscreenbutton(font, "Fullscreen: notloaded");
 	Button changeresbutton(font, "Change resolution");
@@ -62,6 +61,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 			bool backtomenu = false;
 			bool quitgame = false;
 			bool resetwindow = false;
+			bool resetresolution = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quitgame = true;
@@ -105,14 +105,11 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 						{
 							if (resolutionbuttons[i].arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
 							{
-								if (resolutions[i].first <= sf::VideoMode::getDesktopMode().width && resolutions[i].second <= sf::VideoMode::getDesktopMode().height)
-								{
-									screenreswidth = resolutions[i].first;
-									screenresheight = resolutions[i].second;
-									resetwindow = true;
-									currentresolution.setString("W" + std::to_string(screenreswidth) + "x" + std::to_string(screenresheight) + "H");
-									drawresolutionchoices = !drawresolutionchoices;
-								}
+								screenreswidth = resolutions[i].first;
+								screenresheight = resolutions[i].second;
+								resetwindow = true;
+								currentresolution.setString("W" + std::to_string(screenreswidth) + "x" + std::to_string(screenresheight) + "H");
+								drawresolutionchoices = !drawresolutionchoices;
 							}
 						}
 					}
@@ -131,6 +128,18 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 				{
 					backtomenu = true;
 				}
+				else if (windowevent.key.code == sf::Keyboard::R)
+				{
+					resetresolution = true;
+					resetwindow = true;
+				}
+			}
+
+			if(resetresolution)
+			{
+				screenreswidth = 800;
+				screenresheight = 600;
+				fullscreen = false;
 			}
 			
 			if (resetwindow)
@@ -201,10 +210,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 				for (int i = 0; i < resolutionbuttons.size(); i++)
 				{
 					Button tempbutton = resolutionbuttons[i];
-					if (resolutions[i].first <= sf::VideoMode::getDesktopMode().width && resolutions[i].second <= sf::VideoMode::getDesktopMode().height)
-					{
-						gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
-					}
+					gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
 				}
 			}
 		}

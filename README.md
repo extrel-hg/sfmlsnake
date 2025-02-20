@@ -1,4 +1,4 @@
-# V1.3.1.0 - 19.11.2024
+# V2.0.1.2 - 17.02.2025
 By Hubert Gonera
 
 ## Welcome
@@ -26,11 +26,9 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Minor:**
-* You can use B to go back to the main menu from the settings and leaderboard menu.
-* * You can also use Right Control + B to go back to main menu during a game. This will lose progress, and the highscore wont be saved.
-* Added buttons to leaderboard menu.
-* Now the leaderboard menu shows the current listed highscores.
+**Patch:**
+* Made changes to CMakeLists.txt so that the resulting app has RPATH set to origin. This will allow the application to check for .so files in its own install directory. This means the user does not need to install SFML 2.6.2, because I will be shipping the required .so files with my game.
+* Further changes to CMakeLists.txt that automate the build process.
 
 ## Versioning:
 
@@ -38,7 +36,7 @@ Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
 
 Version flags:
 
-* COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
+* COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions. May also be increased when a major update to the backend happens, or if the project structure (on the programmers end) majorly changes.
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
 * MINOR - Incremented if added small to medium features in existing systems, or if they were reworked. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 * PATCH - No new features, just bug fixes.
@@ -70,16 +68,15 @@ www.github.com/Kimoworwa
 ## Building the game yourself
 
 ### SFML
-This version uses 2.6.1 SFML for Visual Studio 2022, 32-bit.
+This version uses SFML 2.6.2. Download the SFML libary either for linux or windows, depending on which one you are using.
 
-Link and include it properly in your IDE (or VS).
+The CMakeLists.txt file should automatically link and include any SFML version, that is present in the snake/SFML folder. The SFML folder should contain include, lib and share folders.
 
 ### tinyfiledialogs
-This version uses tinyfiledialogs v3.18.2.
-Download it from www.sourceforge.net/projects/tinyfiledialogs.
-In your IDE include the tinyfiledialogs.h, and link the tinyfiledialogs.c.
+This version uses tinyfiledialogs v3.19.1.
+
+This libary is already present in this repo, you don't need to download it. It is cross-platform, so no need to change from Windows to Linux version of the library, or vice versa.
 
 
 ### Notice
-Bear in mind I am very much a beginner in terms of installing libraries manually, and I may have got the terminology somewhere wrong.
-But since I somehow figured it out, you can too.
+I am a beginner and self-taught game developer. If anything I've written is inconcise, or any term I've used it not proper, I am sorry. I am still learning.
