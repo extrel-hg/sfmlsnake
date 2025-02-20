@@ -25,6 +25,13 @@ target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFM
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLVERSION}/include)
 
+#temp
+if(WIN32)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/mingw64/include)
+set(CMAKE_C_COMPILER ${CMAKE_CURRENT_SOURCE_DIR}/mingw64bin//gcc.exe)
+set(CMAKE_CXX_COMPILER ${CMAKE_CURRENT_SOURCE_DIR}/mingw64/bin/g++.exe)
+endif(WIN32)
+
 add_subdirectory(tinyfiledialogs)
 target_link_libraries(${PROJECT_NAME} tinyfiledialogs)
 
