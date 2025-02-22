@@ -89,10 +89,12 @@ On Windows, I encountered problems with the already built versions of SFML, as s
 Download the SFML source code for 2.6.2, and excract it somewhere on your PC. SFML also uses CMake for building, I highly recommend using MinGW Makefiles for building, instead of Visual Studio solutions. Assuming you use MinGW Makefiles (all of my scripts for Windows do that, you have to explicitly state that you are using something else), you can build SFML from source using those commands:
 
 Open terminal in the SFML-2.6.2 folder, that was extracted from the source code zip file. Send those commands:
-* mkdir build
-* cd build
-* cmake .. -G "MinGW Makefiles"
-* make
+```
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles"
+make
+```
 
 The built library will be in SFML-2.6.2/build/lib. You can find both .dll and .a files there.
 
