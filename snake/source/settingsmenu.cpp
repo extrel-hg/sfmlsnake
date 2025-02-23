@@ -216,4 +216,5 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 		}
 		gamewindow.display();
 	}
+	return -1;
 }

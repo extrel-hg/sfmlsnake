@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 set(SFMLFOLDER "SFML-2.6.2")
-set(INCLUDEDLLS true)
+set(INCLUDEDLLS)
 
 add_executable(${PROJECT_NAME}
     source/gameloop.cpp
@@ -23,12 +23,7 @@ add_executable(${PROJECT_NAME}
 
 if(INCLUDEDLLS)
     message(STATUS "Including .dlls (we are working on windows)")
-	
-	##You need to build SFML .dll's and .a's using the same compiler, that you will use during building of the game.
-	##I use MinGW Makefiles everywhere on Windows, so I am building SFML with them as well. Then I build my game with it.
-	##Building SFML is easy. Download source code, and build using CMake as normal. Inside of the build/lib folder are the resulting .dll and .a files.
-	##The resulting built library put into SFML-BUILTLIBS.
-	##After that, you can delete the build folder. Keep the whole SFML-2.6.2 folder though, as we need that for include (see below)
+
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-system-2.dll DESTINATION finishedsnake)
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-window-2.dll DESTINATION finishedsnake)
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-graphics-2.dll DESTINATION finishedsnake)
@@ -48,6 +43,7 @@ if(NOT INCLUDEDLLS)
     install(FILES ${SFMLFOLDER}/lib/libsfml-graphics.so.2.6.2 DESTINATION finishedsnake RENAME libsfml-graphics.so.2.6)
 	target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/lib)
 	target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/include)
+
 endif(NOT INCLUDEDLLS)
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
