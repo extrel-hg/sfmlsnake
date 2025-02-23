@@ -13,9 +13,6 @@
 
 -> Make sure you dont include gamedata folder in release.
 
--> Delete debugging file.
-
-
 # Vdev - Ddev
 By Hubert Gonera
 
@@ -32,20 +29,39 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 ## Controls:
 
-Use arrows or WASD to change snake direction.
+### General
 
-You can use enter to start the game.
-You can (almost anywhere) use Q instead of the X button to close the game.
+* Q - closes the game
 
-The GUI elements work as well, but using only the keyboard is way faster.
+### Main Menu
 
-After a round if the "Ask for a name after a round" setting is set to "No", the game will set the name to "NOT-SET" and go straight to the menu, no matter what.
-If that setting is set to "Yes", pressing space will use the default name, while pressing enter will prompt the user to type a name.
+* Enter - start the game
+* L - leaderboard
+* S - settings
+
+### Leaderboard
+
+* B - back to menu
+* Up and down arrows - move leaderboard
+
+### Settings
+
+* B - back to menu
+* R - reset graphics settings
+
+* Default name - name used for the score, when the player does not input any name.
+* Ask for a name after a round - when set to no, the game will never allow to input a name. Only the default name will be used.
+
+### Game
+
+* WASD or arrows - change Snake direction
+
+### Game end
+
+* Space - go back to menu and use default name.
+* Enter - ask for name, then go back to menu. If the name is left blank, the default name will be used. If "Ask for a name after a round" is set to no, the game won't ask for a name.
 
 ## Update notes:
-
-**Patch:**
-* README changes.
 
 ## Versioning:
 
@@ -69,9 +85,6 @@ from each alpha version (alpha-8, alpha-7 etc.) may be added to release update n
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
-## Previous COMPATIBILITY updates
-
-* The update from 1.x.y.z to 2.x.y.z was justified by moving the entire project from Visual Studio to CMake, and making the project compatibile with both Windows and Linux.
 
 ## Credits
 Thanks to everyone who created and manages SFML.
@@ -94,7 +107,7 @@ The project as of now uses two 3rd party libraries, SFML and tinyfiledialogs.
 
 ### Tinyfiledialogs
 
-Download the latest version of tinyfiledialogs. The current version of the game uses v3.19.1. As it is a header-only library, there is no need for downloading the built library. You just include the header in your project and it is build along with the app. My CMake file will properly add TFD that is present in snake/tinyfiledialogs. Specifically, inside that folder there should be the tinyfiledialogs .c and .h file.
+Download the latest version of tinyfiledialogs. The current version of the game uses v3.19.1. As it is a header-only library, there is no need for downloading the built library. You just include the header in your project and it is build along with the app. My CMake file will properly add TFD that is present in snake/tinyfiledialogs. Specifically, inside that folder there should be the tinyfiledialogs .c and .h file, and my CMakeLists.txt script, which is included in the source code.
 
 ### SFML
 

@@ -1,4 +1,18 @@
+# Previous COMPATIBILITY updates
+
+* The update from 1.x.y.z to 2.x.y.z was justified by moving the entire project from Visual Studio to CMake, and making the project compatibile with both Windows and Linux.
+
 # Previous update notes:
+
+## V2.0.1.3
+*23.02.2025*
+
+**Patch:**
+* README changes.
+* * Rewritten Controls section.
+* When "Ask for a name after a round" is set to no, the default name will be used, instead of the "NOT-SET" name.
+* Moved "Previous COMPATIBILITY updates" to updatelogs.md.
+* Small update to "Building yourself" section.
 
 ## V2.0.1.2
 *17.02.2025*

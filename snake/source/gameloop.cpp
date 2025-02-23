@@ -476,7 +476,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	}
 	else if(!askforcustomnameafteraround)
 	{
-		name = "NOT-SET";
+		name = defaultplayername;
 	}
 
 	return retcode;

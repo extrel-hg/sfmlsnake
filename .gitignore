@@ -1,5 +1,6 @@
 snake/build
 snake/SFML*
 snake/mingw*
-snake/tinyfiledialogs
+snake/tinyfiledialogs/*
+!snake/tinyfiledialogs/CMakeLists.txt
 .vs
