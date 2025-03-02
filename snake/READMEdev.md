@@ -63,6 +63,9 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 ## Update notes:
 
+**Patch:**
+* Revised and updated credits.
+
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
@@ -87,17 +90,18 @@ Each README has its build version in the beginning, and build date in dd/mm/yyyy
 
 
 ## Credits
-Thanks to everyone who created and manages SFML.
-www.sfml-dev.org
 
-Thanks to Guillaume Vareille for creating and managing tinyfiledialogs.
-www.ysengrin.com
+### Pasja Informatyki
+I thank Miroslaw Zelent and Diaman Stelmach for providing an easy and free C++ course, many years ago. Without them, I would not get interested in making basic C++ console games, and wouldn't be here.
 
-Big thanks to Miroslaw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
-www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
+### SFML
+Thanks to each volunteer who helps create and manage SFML.
 
-Thanks to Tymon Drop for designing the snake graphics in V1.2.3.0 and implementing WASD controls.
-www.github.com/Kimoworwa
+### tinyfiledialogs
+Thanks to Guillaume Vareille for the header-only tinyfiledialogs library.
+
+### Tymon Drop
+Thanks to Tymon Drop for sedigning the snake graphics in V1.2.3.0 and implementing WSAD controls.
 
 ## Building the game yourself
 
