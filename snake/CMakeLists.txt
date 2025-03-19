@@ -37,6 +37,7 @@ if(INCLUDEDLLS)
 	target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
 	target_sources(${PROJECT_NAME} PRIVATE source/icon.rc)
 	##Those two lines disable opening of console, and the adding of icon.rc to sources sets the icon
+    
 endif(INCLUDEDLLS)
 
 if(NOT INCLUDEDLLS)
