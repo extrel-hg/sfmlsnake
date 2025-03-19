@@ -24,7 +24,7 @@ add_executable(${PROJECT_NAME}
 if(INCLUDEDLLS)
     message(STATUS "Including .dlls (we are working on windows)")
 
-    add_compile_options(-static -static-libgcc -static-libstdc++)
+    set(CMAKE_CXX_FLAGS "-static -static-libgcc -static-libstdc++")
 
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER} buildsfml)
 
