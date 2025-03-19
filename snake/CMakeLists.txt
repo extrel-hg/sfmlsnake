@@ -24,12 +24,14 @@ add_executable(${PROJECT_NAME}
 if(INCLUDEDLLS)
     message(STATUS "Including .dlls (we are working on windows)")
 
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-system-2.dll DESTINATION finishedsnake)
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-window-2.dll DESTINATION finishedsnake)
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/sfml-graphics-2.dll DESTINATION finishedsnake)
-	target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/SFML-BUILTLIBS/)
-	target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER}/include)
-	
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/${SFMLFOLDER} buildsfml)
+
+    target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/SFML)
+
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/buildsfml/lib/sfml-system-2.dll DESTINATION finishedsnake)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/buildsfml/lib/sfml-window-2.dll DESTINATION finishedsnake)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/buildsfml/lib/sfml-graphics-2.dll DESTINATION finishedsnake)
+
 	target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
 	target_sources(${PROJECT_NAME} PRIVATE source/icon.rc)
 	##Those two lines disable opening of console, and the adding of icon.rc to sources sets the icon

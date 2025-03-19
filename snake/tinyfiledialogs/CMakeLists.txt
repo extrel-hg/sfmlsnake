@@ -1,4 +1,4 @@
-add_library(tinyfiledialogs tinyfiledialogs.c tinyfiledialogs.h)
+add_library(tinyfiledialogs STATIC tinyfiledialogs.c tinyfiledialogs.h)
 
 target_include_directories(tinyfiledialogs
     PUBLIC

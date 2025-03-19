@@ -65,6 +65,7 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 **Patch:**
 * Revised and updated credits.
+* Changes to windows CMake building system.
 
 ## Versioning:
 
@@ -87,7 +88,6 @@ In some cases in the update notes there will be a section covering changes from 
 from each alpha version (alpha-8, alpha-7 etc.) may be added to release update notes. This does not apply to updatelogs.md, they only contain changes for that version.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
-
 
 ## Credits
 
@@ -121,21 +121,11 @@ On Linux, use the SFML version that is built using GCC 64-bit. That version is a
 
 On Windows, I encountered problems with the already built versions of SFML, as such, the windows version of CMake requires you build SFML yourself, using the same compilier you will use for the game.
 
-Download the SFML source code for 2.6.2, and excract it somewhere on your PC. SFML also uses CMake for building, I highly recommend using MinGW Makefiles for building, instead of Visual Studio solutions. Assuming you use MinGW Makefiles (all of my scripts for Windows do that, you have to explicitly state that you are using something else), you can build SFML from source using those commands:
-
-Open terminal in the SFML-2.6.2 folder, that was extracted from the source code zip file. Send those commands:
-* mkdir build
-* cd build
-* cmake .. -G "MinGW Makefiles"
-* make
-
-The built library will be in SFML-2.6.2/build/lib. You can find both .dll and .a files there.
-
-Take all of them, and put them in snake/SFML-BUILTLIBS.  Take the source code for SFML-2.6.2, and put that whole folder into the snake folder as well. This is necessary for my CMake script to include the library.
+Download the SFML source code for 2.6.2, and extract it into snake directory.
 
 ### Build scripts
 
-I have included two .sh scripts for automatically building snake.
+I have included two scripts for automatically building snake.
 
 My CMake script has a variable called "INCLUDEDLLS". If it is set to false (default), CMake is set in the Linux configuration. If set to true, it will build for Windows. This variable affects wheter or not the RPATH of the .exe will be edited, and what files to include in the installed folder.
 
