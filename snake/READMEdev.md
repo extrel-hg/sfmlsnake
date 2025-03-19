@@ -63,15 +63,6 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 ## Update notes:
 
-**Minor:**
-* Removed unnecessary setting "Ask for name after a round" from the settings GUI.
-
-**Patch:**
-* Revised and updated credits.
-* Changes to windows CMake building system.
-* Made windows version not require MinGW C++ .dll files. They are now statically linked.
-* Fixed leaderboard "dot" bug.
-
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)

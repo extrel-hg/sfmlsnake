@@ -1,4 +1,4 @@
-# V2.0.1.3 - 23.02.2025
+# V2.0.2.0 - 19.03.2025
 By Hubert Gonera
 
 ## Welcome
@@ -48,12 +48,14 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 ## Update notes:
 
+**Minor:**
+* Removed unnecessary setting "Ask for name after a round" from the settings GUI.
+
 **Patch:**
-* README changes.
-* * Rewritten Controls section.
-* When "Ask for a name after a round" is set to no, the default name will be used, instead of the "NOT-SET" name.
-* Moved "Previous COMPATIBILITY updates" to updatelogs.md.
-* Small update to "Building yourself" section.
+* Revised and updated credits.
+* Changes to windows CMake building system.
+* Made windows version not require MinGW C++ .dll files. They are now statically linked.
+* Fixed leaderboard "dot" bug.
 
 ## Versioning:
 
@@ -77,19 +79,19 @@ from each alpha version (alpha-8, alpha-7 etc.) may be added to release update n
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
-
 ## Credits
-Thanks to everyone who created and manages SFML.
-www.sfml-dev.org
 
-Thanks to Guillaume Vareille for creating and managing tinyfiledialogs.
-www.ysengrin.com
+### Pasja Informatyki
+I thank Miroslaw Zelent and Diaman Stelmach for providing an easy and free C++ course, many years ago. Without them, I would not get interested in making basic C++ console games, and wouldn't be here.
 
-Big thanks to Miroslaw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
-www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
+### SFML
+Thanks to each volunteer who helps create and manage SFML.
 
-Thanks to Tymon Drop for designing the snake graphics in V1.2.3.0 and implementing WASD controls.
-www.github.com/Kimoworwa
+### tinyfiledialogs
+Thanks to Guillaume Vareille for the header-only tinyfiledialogs library.
+
+### Tymon Drop
+Thanks to Tymon Drop for sedigning the snake graphics in V1.2.3.0 and implementing WSAD controls.
 
 ## Building the game yourself
 
@@ -109,21 +111,11 @@ On Linux, use the SFML version that is built using GCC 64-bit. That version is a
 
 On Windows, I encountered problems with the already built versions of SFML, as such, the windows version of CMake requires you build SFML yourself, using the same compilier you will use for the game.
 
-Download the SFML source code for 2.6.2, and excract it somewhere on your PC. SFML also uses CMake for building, I highly recommend using MinGW Makefiles for building, instead of Visual Studio solutions. Assuming you use MinGW Makefiles (all of my scripts for Windows do that, you have to explicitly state that you are using something else), you can build SFML from source using those commands:
-
-Open terminal in the SFML-2.6.2 folder, that was extracted from the source code zip file. Send those commands:
-* mkdir build
-* cd build
-* cmake .. -G "MinGW Makefiles"
-* make
-
-The built library will be in SFML-2.6.2/build/lib. You can find both .dll and .a files there.
-
-Take all of them, and put them in snake/SFML-BUILTLIBS.  Take the source code for SFML-2.6.2, and put that whole folder into the snake folder as well. This is necessary for my CMake script to include the library.
+Download the SFML source code for 2.6.2, and extract it into snake directory.
 
 ### Build scripts
 
-I have included two .sh scripts for automatically building snake.
+I have included two scripts for automatically building snake.
 
 My CMake script has a variable called "INCLUDEDLLS". If it is set to false (default), CMake is set in the Linux configuration. If set to true, it will build for Windows. This variable affects wheter or not the RPATH of the .exe will be edited, and what files to include in the installed folder.
 

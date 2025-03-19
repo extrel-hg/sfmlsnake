@@ -4,6 +4,18 @@
 
 # Previous update notes:
 
+## V2.0.2.0
+*19.03.2025*
+
+**Minor:**
+* Removed unnecessary setting "Ask for name after a round" from the settings GUI.
+
+**Patch:**
+* Revised and updated credits.
+* Changes to windows CMake building system.
+* Made windows version not require MinGW C++ .dll files. They are now statically linked.
+* Fixed leaderboard "dot" bug.
+
 ## V2.0.1.3
 *23.02.2025*
 
