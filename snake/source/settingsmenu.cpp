@@ -2,13 +2,12 @@
 #include "mainmenuheader.h"
 
 int settingsmenurecalcbuttons(sf::Font& font, Button& backtomenubutton, Button& fullscreenbutton, Button& changeresbutton, std::vector<Button>& resolutionbuttons, Button& warningbutton,
-	Button& changedefname, Button& askfornamebutton, sf::Text& currentresolution, sf::Text& currentdefaultname)
+	Button& changedefname, sf::Text& currentresolution, sf::Text& currentdefaultname)
 {
 	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(600 - 35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	fullscreenbutton.recalculatepos({ TORELXPOS(87.5),TORELYPOS(35) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	changeresbutton.recalculatepos({ TORELXPOS(107.5),TORELYPOS(95) }, { TORELXPOS(200),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	changedefname.recalculatepos({ TORELXPOS(127.5),TORELYPOS(95+60) }, { TORELXPOS(240),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	askfornamebutton.recalculatepos({ TORELXPOS(127.5+55),TORELYPOS(95 + 120) }, { TORELXPOS(350),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 
 	warningbutton.recalculatepos({ TORELXPOS(400),TORELYPOS(300) }, { TORELXPOS(800), TORELYPOS(600) }, TORELXPOS(10), TORELXPOS(25));
 
@@ -38,7 +37,6 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 	Button fullscreenbutton(font, "Fullscreen: notloaded");
 	Button changeresbutton(font, "Change resolution");
 	Button changedefname(font, "Change default name");
-	Button askfornamebutton(font, "Ask for name after a round: notloaded");
 	Button warningbutton(font, "Welcome to the settings menu.\nAs of now, there is no protection when you change the graphics settings.\nIn case of errors, delete the set.txt file in gamedata folder.\nThis will reset all settings to their default values.\nPress anywhere to continue.");
 
 	sf::Text currentresolution("W" + std::to_string(screenreswidth) + "x" + std::to_string(screenresheight) + "H", font);
@@ -51,7 +49,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 		resolutionbuttons.push_back(Button(font, "W" + std::to_string(resolutions[i].first) + "x" + std::to_string(resolutions[i].second) + "H"));
 	}
 
-	settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons,warningbutton, changedefname, askfornamebutton, currentresolution, currentdefaultname);
+	settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons,warningbutton, changedefname, currentresolution, currentdefaultname);
 
 	while (!quitfull)
 	{
@@ -94,10 +92,6 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 						{
 							quitgame = true;
 						}
-					}
-					if (askfornamebutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
-					{
-						askforcustomnameafteraround = !askforcustomnameafteraround;
 					}
 					if (drawresolutionchoices)
 					{
@@ -148,7 +142,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 				{
 					return -1;
 				}
-				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons, warningbutton, changedefname, askfornamebutton, currentresolution, currentdefaultname);
+				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons, warningbutton, changedefname, currentresolution, currentdefaultname);
 			}
 
 			if (quitgame || backtomenu)
@@ -183,15 +177,6 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 		}
 		fullscreenbutton.buttontextupdate();
 
-		if (askforcustomnameafteraround)
-		{
-			askfornamebutton.buttonstring = "Ask for name after a round: Yes";
-		}
-		else {
-			askfornamebutton.buttonstring = "Ask for name after a round: No";
-		}
-		askfornamebutton.buttontextupdate();
-
 		gamewindow.clear(backgroundcolor);
 		if (!visitedsettingsyet)
 		{
@@ -202,7 +187,6 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 			gamewindow.draw(fullscreenbutton);
 			gamewindow.draw(changeresbutton);
 			gamewindow.draw(changedefname);
-			gamewindow.draw(askfornamebutton);
 			gamewindow.draw(currentresolution);
 			gamewindow.draw(currentdefaultname);
 			if (drawresolutionchoices)
