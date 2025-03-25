@@ -23,6 +23,7 @@ add_executable(${PROJECT_NAME}
     source/txtfiles.cpp 
     source/mainheader.h
     source/mainmenuheader.h
+    source/2playergameloop.cpp
 )
 ## Adds all source files
 

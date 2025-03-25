@@ -8,8 +8,8 @@
 #include <vector>
 #include <cmath>
 
-const std::string versiontag = "V2.0.2.0";
-const std::string builddate = "19.03.2025";
+const std::string versiontag = "V2.1.0.0";
+const std::string builddate = "25.03.2025";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -21,6 +21,7 @@ const sf::Color backgroundcolor(10, 10, 10, 255);
 int mainmenu(sf::RenderWindow& gamewindow);
 
 int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font);
+int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font);
 
 std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame, std::string msgstring = "Enter your name or nickname below.\nLeave blank for default name.\nPress enter to confirm.");
 

@@ -59,7 +59,13 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 ### Game end
 
 * Space - go back to menu and use default name.
-* Enter - ask for name, then go back to menu. If the name is left blank, the default name will be used. If "Ask for a name after a round" is set to no, the game won't ask for a name.
+* Enter - ask for name, then go back to menu. If the name is left blank, the default name will be used.
+
+### Two player mode
+
+* Controls are the same as in normal mode, but player 1 controls the blue-headed snake using arrows, and player 2 controls the yellow-headed snake using WASD.
+* The player who lives longer than the other player wins.
+* Speed is higher in two player mode to encourage faster gameplay.
 
 ## Update notes:
 

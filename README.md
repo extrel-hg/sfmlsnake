@@ -1,4 +1,4 @@
-# V2.0.2.0 - 19.03.2025
+# V2.1.0.0 - 25.03.2025
 By Hubert Gonera
 
 ## Welcome
@@ -44,18 +44,26 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 ### Game end
 
 * Space - go back to menu and use default name.
-* Enter - ask for name, then go back to menu. If the name is left blank, the default name will be used. If "Ask for a name after a round" is set to no, the game won't ask for a name.
+* Enter - ask for name, then go back to menu. If the name is left blank, the default name will be used.
+
+### Two player mode
+
+* Controls are the same as in normal mode, but player 1 controls the blue-headed snake using arrows, and player 2 controls the yellow-headed snake using WASD.
+* The player who lives longer than the other player wins.
+* Speed is higher in two player mode to encourage faster gameplay.
 
 ## Update notes:
 
+**Major:**
+* Added two player mode. You can pass through yourself in two player mode.
+
 **Minor:**
-* Removed unnecessary setting "Ask for name after a round" from the settings GUI.
+* Added number of highscores in leaderboard menu.
+* Added scrolling using mouse wheel in leaderboard menu.
 
 **Patch:**
-* Revised and updated credits.
-* Changes to windows CMake building system.
-* Made windows version not require MinGW C++ .dll files. They are now statically linked.
-* Fixed leaderboard "dot" bug.
+* Clarified controls section of readme.
+* Clarified ask for name screen after game end.
 
 ## Versioning:
 

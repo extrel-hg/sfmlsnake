@@ -463,7 +463,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	bool quitgame = false;
 	if (askforcustomnameafteraround && !skipask)
 	{
-		std::string playername = getstringfromplayermenu(font, gamewindow, quitgame);
+		std::string playername = getstringfromplayermenu(font, gamewindow, quitgame, "Please provide your name or nickname.\nLeave blank for default.");
 		name = playername;
 		if (quitgame)
 		{

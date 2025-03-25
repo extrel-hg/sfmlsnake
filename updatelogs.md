@@ -4,6 +4,19 @@
 
 # Previous update notes:
 
+## V2.1.0.0
+*25.03.2025*
+**Major:**
+* Added two player mode. You can pass through yourself in two player mode.
+
+**Minor:**
+* Added number of highscores in leaderboard menu.
+* Added scrolling using mouse wheel in leaderboard menu.
+
+**Patch:**
+* Clarified controls section of readme.
+* Clarified ask for name screen after game end.
+
 ## V2.0.2.0
 *19.03.2025*
 

@@ -1,9 +1,10 @@
 #include "mainheader.h"
 #include "mainmenuheader.h"
 
-int recalcleaderboardmenu(Button& backtomenubutton, Button& highscoreframe, Button& downbutton, Button& upbutton, Button& shownhighscores)
+int recalcleaderboardmenu(Button& backtomenubutton,Button& amountofhighscores, Button& highscoreframe, Button& downbutton, Button& upbutton, Button& shownhighscores)
 {
 	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	amountofhighscores.recalculatepos({ TORELXPOS(100+180+10+20),TORELYPOS(35) }, { TORELXPOS(220),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	highscoreframe.recalculatepos({ TORELXPOS(400),TORELYPOS(300 + (35 + 20) / 2) }, { TORELXPOS(800 - 20),TORELYPOS(600 - 35 - 10 - 10 - 20) }, TORELXPOS(5));
 
 	downbutton.recalculatepos({ TORELXPOS(757.5),TORELYPOS(100+38*12) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(15));
@@ -23,6 +24,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 	int drawfrom = 0;
 
 	Button backtomenubutton(font, "Back to menu");
+	Button amountofhighscores(font);
 	Button highscoreframe(font, " ");
 
 	Button downbutton(font, "\\/");
@@ -53,7 +55,11 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 		}
 		highscorebuttonstag.push_back(Button(font, temptagstring, { TORELXPOS(370 + 25 + 90 - 10 + 250 / 2),TORELYPOS(100 + (35 + 3) * i) }, { TORELXPOS(250),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(25)));
 	}
-	recalcleaderboardmenu(backtomenubutton, highscoreframe,downbutton,upbutton,shownhighscores);
+
+	amountofhighscores.buttonstring = "No. highscores:" + std::to_string(highscores.size());
+	amountofhighscores.buttontextupdate();
+
+	recalcleaderboardmenu(backtomenubutton, amountofhighscores, highscoreframe,downbutton,upbutton,shownhighscores);
 
 	while (!quitfull)
 	{
@@ -65,9 +71,23 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 			bool resetwindow = false;
 			bool goup = false;
 			bool godown = false;
+			int amountofscrollticks = 0;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quitgame = true;
+			}
+			if (windowevent.type == sf::Event::MouseWheelMoved)
+			{
+				amountofscrollticks = windowevent.mouseWheel.delta;
+				if(amountofscrollticks > 0)
+				{
+					goup = true;
+				}
+				else if (amountofscrollticks < 0)
+				{
+					godown = true;
+					amountofscrollticks = -amountofscrollticks;
+				}
 			}
 			if (windowevent.type == sf::Event::MouseButtonReleased)
 			{
@@ -106,24 +126,30 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 
 			if (godown)
 			{
-				if (highscorebuttonsname.size() > 13)
+				for(int i = 0; i < amountofscrollticks; i++)
 				{
-					if (drawto < highscorebuttonsname.size())
+					if (highscorebuttonsname.size() > 13)
 					{
-						drawfrom++;
-						drawto++;
+						if (drawto < highscorebuttonsname.size())
+						{
+							drawfrom++;
+							drawto++;
+						}
 					}
 				}
 			}
 
 			if (goup)
 			{
-				if (highscorebuttonsname.size() > 13)
+				for(int i = 0; i < amountofscrollticks; i++)
 				{
-					if (drawfrom > 0)
+					if (highscorebuttonsname.size() > 13)
 					{
-						drawfrom--;
-						drawto--;
+						if (drawfrom > 0)
+						{
+							drawfrom--;
+							drawto--;
+						}
 					}
 				}
 			}
@@ -146,6 +172,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 
 		gamewindow.clear(backgroundcolor);
 		gamewindow.draw(backtomenubutton);
+		gamewindow.draw(amountofhighscores);
 		gamewindow.draw(highscoreframe);
 		sf::Transform buttonoffset;
 		buttonoffset.translate(sf::Vector2f(0, -TORELYPOS(38 * drawfrom)));
