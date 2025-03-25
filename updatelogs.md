@@ -4,6 +4,11 @@
 
 # Previous update notes:
 
+## V2.1.0.1
+*25.03.2025*
+**Patch:**
+* Made the speed in two player mode the same as in normal mode.
+
 ## V2.1.0.0
 *25.03.2025*
 **Major:**

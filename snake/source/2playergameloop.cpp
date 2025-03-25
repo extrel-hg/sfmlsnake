@@ -194,7 +194,7 @@ void calcplayer1(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple
 
 				//V1.1.0.0 speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
 
-				speed1 = (-pow((0.013 * truesnakesize1), 2)) + (truesnakesize1 / 25.0f) + 1.7f;
+				speed1 = (-pow((0.013 * truesnakesize1), 2)) + (truesnakesize1 / 25.0f) + 1.0f;
 
 				snakeparts1.push_back(oldhead);
 			}
@@ -287,7 +287,7 @@ void calcplayer2(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple
 
 				//V1.1.0.0 speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
 
-				speed1 = (-pow((0.013 * truesnakesize2), 2)) + (truesnakesize2 / 25.0f) + 1.7f;
+				speed1 = (-pow((0.013 * truesnakesize2), 2)) + (truesnakesize2 / 25.0f) + 1.0f;
 
 				snakeparts2.push_back(oldhead);
 			}
@@ -616,8 +616,8 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 	double movementcap = dt * 15*4;
 	*/
 
-	double speed1 = 1.5;
-	double speed2 = 1.5;
+	double speed1 = 1.0;
+	double speed2 = 1.0;
 
 	double accumulator = 0.0;
 	sf::Clock clock;

@@ -1,4 +1,4 @@
-# V2.1.0.0 - 25.03.2025
+# V2.1.0.1 - 25.03.2025
 By Hubert Gonera
 
 ## Welcome
@@ -50,20 +50,11 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 * Controls are the same as in normal mode, but player 1 controls the blue-headed snake using arrows, and player 2 controls the yellow-headed snake using WASD.
 * The player who lives longer than the other player wins.
-* Speed is higher in two player mode to encourage faster gameplay.
 
 ## Update notes:
 
-**Major:**
-* Added two player mode. You can pass through yourself in two player mode.
-
-**Minor:**
-* Added number of highscores in leaderboard menu.
-* Added scrolling using mouse wheel in leaderboard menu.
-
 **Patch:**
-* Clarified controls section of readme.
-* Clarified ask for name screen after game end.
+* Made the speed in two player mode the same as in normal mode.
 
 ## Versioning:
 

@@ -65,7 +65,6 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 * Controls are the same as in normal mode, but player 1 controls the blue-headed snake using arrows, and player 2 controls the yellow-headed snake using WASD.
 * The player who lives longer than the other player wins.
-* Speed is higher in two player mode to encourage faster gameplay.
 
 ## Update notes:
 
