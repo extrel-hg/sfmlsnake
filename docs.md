@@ -1,3 +1,3 @@
 gitea sync test
 gitea push test
-github account test
+new github account test
