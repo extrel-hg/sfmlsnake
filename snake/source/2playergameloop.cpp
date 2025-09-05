@@ -287,7 +287,7 @@ void calcplayer2(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple
 
 				//V1.1.0.0 speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
 
-				speed1 = (-pow((0.013 * truesnakesize2), 2)) + (truesnakesize2 / 25.0f) + 1.0f;
+				speed2 = (-pow((0.013 * truesnakesize2), 2)) + (truesnakesize2 / 25.0f) + 1.0f;
 
 				snakeparts2.push_back(oldhead);
 			}
