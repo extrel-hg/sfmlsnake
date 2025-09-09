@@ -70,6 +70,7 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 **Patch:**
 * Fixed bug in two player mode, that caused only player no. 1 speed to increase.
+* Swapped starting positions in the two player mode, so that they match the keyboard layout.
 
 ## Versioning:
 

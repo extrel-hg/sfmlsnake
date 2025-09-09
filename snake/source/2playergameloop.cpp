@@ -588,12 +588,12 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 	Mapstate mapstate(16, 12);
 
 	std::vector<std::pair<int, int>> snakeparts1;
-	std::pair<int, int> snakeheading1 = { 1,0 }; //speed vector in tiles per second
-	snakeparts1.push_back({ 0,0 });
+	std::pair<int, int> snakeheading1 = { -1,0 }; //speed vector in tiles per second
+	snakeparts1.push_back({ 15, 11 });
 
 	std::vector<std::pair<int, int>> snakeparts2;
-	std::pair<int, int> snakeheading2 = { -1,0 }; //speed vector in tiles per second
-	snakeparts2.push_back({ 15,11 });
+	std::pair<int, int> snakeheading2 = { 1,0 }; //speed vector in tiles per second
+	snakeparts2.push_back({ 0,0 });
 
 	std::pair<int, int> apple1 = { -1, -1 };
 	std::pair<int, int> apple2 = { -1, -1 };
