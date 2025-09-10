@@ -32,7 +32,7 @@ int twoplayerhandleinput(sf::RenderWindow& gamewindow)
 }
 
 int twoplayerrender(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple1, std::pair<int, int>& apple2, std::vector<std::pair<int, int>>& snakeparts1,std::pair<int, int>& snakeheading1,
-	std::vector<std::pair<int, int>>& snakeparts2,std::pair<int, int>& snakeheading2, sf::Text text, sf::Font font)
+	std::vector<std::pair<int, int>>& snakeparts2,std::pair<int, int>& snakeheading2, sf::Text text, sf::Font font, sf::Text point_text)
 {
 	mapstate.fillmapstatewithrgb(backgroundcolor.r, backgroundcolor.g, backgroundcolor.b, backgroundcolor.a);
 
@@ -104,6 +104,7 @@ int twoplayerrender(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<
 	gamewindow.clear();
 	gamewindow.draw(mapstate);
 	gamewindow.draw(text);
+	gamewindow.draw(point_text);
 	gamewindow.display();
 
 	return 1;
@@ -552,7 +553,7 @@ int twoplayersimulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &
 		std::string speedstring2 = std::to_string(speed2);
 		speedstring2 = speedstring2.substr(0, 4);
 
-		text.setString("Arrows: " + std::to_string(truesnakesize1-1) + " Speed:" + speedstring1 + "\nWASD: " + std::to_string(truesnakesize2-1) + " Speed:" + speedstring2);
+		text.setString("Arrows (P1): " + std::to_string(truesnakesize1-1) + " Speed:" + speedstring1 + "\nWASD (P2): " + std::to_string(truesnakesize2-1) + " Speed:" + speedstring2);
 	}
 
 	if(rand()%2 == 0)
@@ -583,7 +584,7 @@ int twoplayersimulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &
 	return 0;
 }
 
-int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
+int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font, int& player1points, int& player2points)
 {
 	Mapstate mapstate(16, 12);
 
@@ -597,7 +598,6 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 
 	std::pair<int, int> apple1 = { -1, -1 };
 	std::pair<int, int> apple2 = { -1, -1 };
-
 
 	double t = 0.0;
 	const double dt = 1 / (128.0f);
@@ -627,9 +627,16 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 
 	sf::Text text;
 	text.setFont(font);
-	text.setCharacterSize(TORELXPOS(30));
+	text.setCharacterSize(TORELXPOS(20));
 	text.setFillColor(sf::Color::White);
 	text.setString("Welcome to snake TWO PLAYER MODE!\nBy Hubert Gonera\n" + versiontag);
+
+	sf::Text point_text;
+	point_text.setFont(font);
+	point_text.setCharacterSize(TORELXPOS(20));
+	point_text.setFillColor(sf::Color::White);
+	point_text.setString(std::to_string(player2points) + ":" + std::to_string(player1points));
+	point_text.setPosition(TORELXPOS(400),TORELYPOS(560));
 
 	gamewindow.setVerticalSyncEnabled(true);
 
@@ -674,7 +681,7 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 			//ticknum++;
 		}
 		//framenum++;
-		twoplayerrender(gamewindow, mapstate, apple1, apple2, snakeparts1 ,snakeheading1, snakeparts2, snakeheading2, text, font);
+		twoplayerrender(gamewindow, mapstate, apple1, apple2, snakeparts1 ,snakeheading1, snakeparts2, snakeheading2, text, font, point_text);
 	}
 
 	if (quit)
@@ -692,11 +699,13 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font)
 	if (playerwhowon == 1)
 	{
 		text.setString("Player 1 won!");
+		player1points++;
 		retcode = 1;
 	}
 	if (playerwhowon == 2)
 	{
 		text.setString("Player 2 won!");
+		player2points++;
 		retcode = 1;
 	}
 

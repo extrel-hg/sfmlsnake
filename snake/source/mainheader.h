@@ -21,7 +21,7 @@ const sf::Color backgroundcolor(10, 10, 10, 255);
 int mainmenu(sf::RenderWindow& gamewindow);
 
 int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font);
-int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font);
+int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font, int& player1points, int& player2points);
 
 std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame, std::string msgstring = "Enter your name or nickname below.\nLeave blank for default name.\nPress enter to confirm.");
 

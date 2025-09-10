@@ -115,6 +115,9 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		return -1;
 	}
 
+	int two_p_p1 = 0;
+	int two_p_p2 = 0;
+
 	while (!quitfull)
 	{
 		int gameloopreturncode = -69;
@@ -209,7 +212,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			if(twoplayers)
 			{
 				int scorefromround = -1;
-				gameloopreturncode = twoplayerscreenloopandinit(gamewindow, font);
+				gameloopreturncode = twoplayerscreenloopandinit(gamewindow, font, two_p_p1, two_p_p2);
 				if (gameloopreturncode == 0)
 				{
 					quit = true;
