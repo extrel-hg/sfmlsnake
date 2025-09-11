@@ -60,6 +60,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 	amountofhighscores.buttontextupdate();
 
 	recalcleaderboardmenu(backtomenubutton, amountofhighscores, highscoreframe,downbutton,upbutton,shownhighscores);
+	int extra_scrolls = 0;
 
 	while (!quitfull)
 	{
@@ -122,11 +123,22 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 				{
 					godown = true;
 				}
+				else if (windowevent.key.code == sf::Keyboard::F)
+				{
+					if(extra_scrolls==0)
+					{
+						extra_scrolls=highscorebuttonsname.size()/10;
+					} 
+					else if(extra_scrolls!=0)
+					{
+						extra_scrolls=0;
+					}
+				}
 			}
 
 			if (godown)
 			{
-				for(int i = 0; i < amountofscrollticks; i++)
+				for(int i = 0; i <= amountofscrollticks+extra_scrolls; i++)
 				{
 					if (highscorebuttonsname.size() > 13)
 					{
@@ -141,7 +153,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 
 			if (goup)
 			{
-				for(int i = 0; i < amountofscrollticks; i++)
+				for(int i = 0; i <= amountofscrollticks+extra_scrolls; i++)
 				{
 					if (highscorebuttonsname.size() > 13)
 					{
