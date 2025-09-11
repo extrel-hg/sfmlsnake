@@ -14,8 +14,11 @@ int recalcleaderboardmenu(Button& backtomenubutton,Button& amountofhighscores, B
 	return 1;
 }
 
-void loadandsort_leaderboard(std::vector<Button>& highscorebuttonsname, std::vector<Button>& highscorebuttonstag, std::vector<Button>& highscorebuttonshighscore,std::vector <std::pair<int, std::string>>& highscores, std::vector<std::string>& highscorenames, sf::Font font, int sort = 0) //0-by highscore, decreasing; 1-increasing
+void loadandsort_leaderboard(std::vector<Button>& highscorebuttonsname, std::vector<Button>& highscorebuttonstag, std::vector<Button>& highscorebuttonshighscore,std::vector <std::pair<int, std::string>>& highscores, std::vector<std::string>& highscorenames, sf::Font font, int sort = 0) //0-by highscore, decreasing; 1-increasing 2- by name A-Z, 3-Z-A   4-By version tag decreasing, increasing
 {
+	highscorebuttonshighscore.clear();
+	highscorebuttonstag.clear();
+	highscorebuttonsname.clear();
 	if(sort == 0 || sort == 1)
 	{
 		bool sorted = false;
@@ -52,7 +55,120 @@ void loadandsort_leaderboard(std::vector<Button>& highscorebuttonsname, std::vec
 				{
 					if(highscorenames[i] < highscorenames[i-1])
 					{
-						swap(highscorenames[i],highscorenames[i-1]);
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+			}
+			if(!did_a_swap) sorted = true;
+		}
+	}
+
+	if(sort == 2 || sort == 3)
+	{
+		bool sorted = false;
+		while(!sorted)
+		{
+			bool did_a_swap = false;
+			for(int i = 1; i < highscores.size(); i++)
+			{
+				std::pair<int, std::string> temp = highscores[i];
+				std::string tempstring = highscorenames[i];
+				if(sort == 3)
+				{
+					if(highscorenames[i] > highscorenames[i-1])
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(sort == 2)
+				{
+					if(highscorenames[i] < highscorenames[i-1])
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(highscorenames[i] == highscorenames[i-1])
+				{
+					if(highscores[i].first > highscores[i-1].first)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+			}
+			if(!did_a_swap) sorted = true;
+		}
+	}
+
+	if(sort == 4 || sort == 5)
+	{
+		bool sorted = false;
+		while(!sorted)
+		{
+			bool did_a_swap = false;
+			for(int i = 1; i < highscores.size(); i++)
+			{
+				std::pair<int, std::string> temp = highscores[i];
+				std::string tempstring = highscorenames[i];
+
+				std::string temptagstring = highscores[i].second;
+				std::reverse(temptagstring.begin(), temptagstring.end());
+				size_t pos = temptagstring.find(';');
+				temptagstring = temptagstring.substr(0, pos);
+				std::reverse(temptagstring.begin(), temptagstring.end());
+
+				std::string temptagstring_prev = highscores[i-1].second;
+				std::reverse(temptagstring_prev.begin(), temptagstring_prev.end());
+				pos = temptagstring_prev.find(';');
+				temptagstring_prev= temptagstring_prev.substr(0, pos);
+				std::reverse(temptagstring_prev.begin(), temptagstring_prev.end());
+
+				if(sort == 4)
+				{
+					if(temptagstring > temptagstring_prev)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(sort == 5)
+				{
+					if(temptagstring < temptagstring_prev)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(temptagstring==temptagstring_prev)
+				{
+					if(highscores[i].first > highscores[i-1].first)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
 					}
 				}
 			}
