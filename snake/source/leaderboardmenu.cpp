@@ -14,26 +14,51 @@ int recalcleaderboardmenu(Button& backtomenubutton,Button& amountofhighscores, B
 	return 1;
 }
 
-int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <std::pair<int, std::string>> highscores, std::vector <std::string> highscorenames)
+void loadandsort_leaderboard(std::vector<Button>& highscorebuttonsname, std::vector<Button>& highscorebuttonstag, std::vector<Button>& highscorebuttonshighscore,std::vector <std::pair<int, std::string>>& highscores, std::vector<std::string>& highscorenames, sf::Font font, int sort = 0) //0-by highscore, decreasing; 1-increasing
 {
-	gamewindow.clear();
-
-	bool quitfull = false;
-
-	int drawto = 13;
-	int drawfrom = 0;
-
-	Button backtomenubutton(font, "Back to menu");
-	Button amountofhighscores(font);
-	Button highscoreframe(font, " ");
-
-	Button downbutton(font, "\\/");
-	Button upbutton(font, "/\\");
-	Button shownhighscores(font, "NULL");
-
-	std::vector<Button> highscorebuttonsname;
-	std::vector<Button> highscorebuttonshighscore;
-	std::vector<Button> highscorebuttonstag;
+	if(sort == 0 || sort == 1)
+	{
+		bool sorted = false;
+		while(!sorted)
+		{
+			bool did_a_swap = false;
+			for(int i = 1; i < highscores.size(); i++)
+			{
+				std::pair<int, std::string> temp = highscores[i];
+				std::string tempstring = highscorenames[i];
+				if(sort == 0)
+				{
+					if(highscores[i].first > highscores[i-1].first)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(sort == 1)
+				{
+					if(highscores[i].first < highscores[i-1].first)
+					{
+						highscores[i] = highscores[i-1];
+						highscores[i-1] = temp;
+						highscorenames[i] = highscorenames[i-1];
+						highscorenames[i-1] = tempstring;
+						did_a_swap = true;
+					}
+				}
+				if(highscores[i].first == highscores[i-1].first)
+				{
+					if(highscorenames[i] < highscorenames[i-1])
+					{
+						swap(highscorenames[i],highscorenames[i-1]);
+					}
+				}
+			}
+			if(!did_a_swap) sorted = true;
+		}
+	}
 
 	for (int i = 0; i < highscores.size(); i++)
 	{
@@ -55,6 +80,30 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 		}
 		highscorebuttonstag.push_back(Button(font, temptagstring, { TORELXPOS(370 + 25 + 90 - 10 + 250 / 2),TORELYPOS(100 + (35 + 3) * i) }, { TORELXPOS(250),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(25)));
 	}
+}
+
+int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <std::pair<int, std::string>> highscores, std::vector <std::string> highscorenames)
+{
+	gamewindow.clear();
+
+	bool quitfull = false;
+
+	int drawto = 13;
+	int drawfrom = 0;
+
+	Button backtomenubutton(font, "Back to menu");
+	Button amountofhighscores(font);
+	Button highscoreframe(font, " ");
+
+	Button downbutton(font, "\\/");
+	Button upbutton(font, "/\\");
+	Button shownhighscores(font, "NULL");
+
+	std::vector<Button> highscorebuttonsname;
+	std::vector<Button> highscorebuttonshighscore;
+	std::vector<Button> highscorebuttonstag;
+
+	loadandsort_leaderboard(highscorebuttonsname,highscorebuttonstag,highscorebuttonshighscore,highscores,highscorenames,font);
 
 	amountofhighscores.buttonstring = "No. highscores:" + std::to_string(highscores.size());
 	amountofhighscores.buttontextupdate();
