@@ -71,6 +71,7 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 **Minor:**
 * Added tracking of won rounds in 2P mode for each session. I.e. the tracking resets after closing the game.
 * Press F to enable and disable fast-scrolling in Leaderboard menu.
+* Added sorting to Leaderboard menu.
 
 **Patch:**
 * Fixed bug in two player mode, that caused only player no. 1 speed to increase.

@@ -1,11 +1,13 @@
 #include "mainheader.h"
 #include "mainmenuheader.h"
 
-int recalcleaderboardmenu(Button& backtomenubutton,Button& amountofhighscores, Button& highscoreframe, Button& downbutton, Button& upbutton, Button& shownhighscores)
+int recalcleaderboardmenu(Button& backtomenubutton,Button& amountofhighscores, Button& highscoreframe, Button& downbutton, Button& upbutton, Button& shownhighscores, Button& changesorting)
 {
 	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	amountofhighscores.recalculatepos({ TORELXPOS(100+180+10+20),TORELYPOS(35) }, { TORELXPOS(220),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	highscoreframe.recalculatepos({ TORELXPOS(400),TORELYPOS(300 + (35 + 20) / 2) }, { TORELXPOS(800 - 20),TORELYPOS(600 - 35 - 10 - 10 - 20) }, TORELXPOS(5));
+
+	changesorting.recalculatepos({ TORELXPOS(700),TORELYPOS(35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 
 	downbutton.recalculatepos({ TORELXPOS(757.5),TORELYPOS(100+38*12) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(15));
 	upbutton.recalculatepos({ TORELXPOS(757.5),TORELYPOS(100 + 38 * 0) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(15));
@@ -206,10 +208,12 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 
 	int drawto = 13;
 	int drawfrom = 0;
+	int sorting_type = 0;
 
 	Button backtomenubutton(font, "Back to menu");
 	Button amountofhighscores(font);
-	Button highscoreframe(font, " ");
+	Button highscoreframe(font);
+	Button changesorting(font, "'S' to change");
 
 	Button downbutton(font, "\\/");
 	Button upbutton(font, "/\\");
@@ -219,12 +223,12 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 	std::vector<Button> highscorebuttonshighscore;
 	std::vector<Button> highscorebuttonstag;
 
-	loadandsort_leaderboard(highscorebuttonsname,highscorebuttonstag,highscorebuttonshighscore,highscores,highscorenames,font);
+	loadandsort_leaderboard(highscorebuttonsname,highscorebuttonstag,highscorebuttonshighscore,highscores,highscorenames,font,sorting_type);
 
 	amountofhighscores.buttonstring = "No. highscores:" + std::to_string(highscores.size());
 	amountofhighscores.buttontextupdate();
 
-	recalcleaderboardmenu(backtomenubutton, amountofhighscores, highscoreframe,downbutton,upbutton,shownhighscores);
+	recalcleaderboardmenu(backtomenubutton, amountofhighscores, highscoreframe,downbutton,upbutton,shownhighscores,changesorting);
 	int extra_scrolls = 0;
 
 	while (!quitfull)
@@ -237,6 +241,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 			bool resetwindow = false;
 			bool goup = false;
 			bool godown = false;
+			bool changesorting_now = false;
 			int amountofscrollticks = 0;
 			if (windowevent.type == sf::Event::Closed)
 			{
@@ -269,6 +274,10 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 				{
 					goup = true;
 				}
+				if (changesorting.arethosethisbuttoncords({sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y}))
+				{
+					changesorting_now = true;
+				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
@@ -298,6 +307,9 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 					{
 						extra_scrolls=0;
 					}
+				} else if (windowevent.key.code == sf::Keyboard::S)
+				{
+					changesorting_now = true;
 				}
 			}
 
@@ -345,12 +357,29 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 			{
 				return 1;
 			}
+
+			if(changesorting_now)
+			{
+				sorting_type++;
+				if(sorting_type > 5) sorting_type = 0;
+				std::string tempstring;
+				if(sorting_type == 0) tempstring = "Score \\/";
+				if(sorting_type == 1) tempstring = "Score /\\";
+				if(sorting_type == 2) tempstring = "Name \\/";
+				if(sorting_type == 3) tempstring = "Name /\\";
+				if(sorting_type == 4) tempstring = "Version \\/";
+				if(sorting_type == 5) tempstring = "Version /\\";
+				changesorting.buttonstring = tempstring;
+				changesorting.buttontextupdate();
+				loadandsort_leaderboard(highscorebuttonsname,highscorebuttonstag,highscorebuttonshighscore,highscores,highscorenames,font,sorting_type);
+			}
 		}
 
 		gamewindow.clear(backgroundcolor);
 		gamewindow.draw(backtomenubutton);
 		gamewindow.draw(amountofhighscores);
 		gamewindow.draw(highscoreframe);
+		gamewindow.draw(changesorting);	
 		sf::Transform buttonoffset;
 		buttonoffset.translate(sf::Vector2f(0, -TORELYPOS(38 * drawfrom)));
 		for (int i = drawfrom; i < drawto && i < highscorebuttonsname.size(); i++)
