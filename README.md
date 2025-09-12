@@ -1,4 +1,4 @@
-# V2.1.0.1 - 25.03.2025
+# V2.1.1.0 - 12.09.2025
 By Hubert Gonera
 
 ## Welcome
@@ -53,8 +53,17 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 ## Update notes:
 
+**Minor:**
+* Added tracking of won rounds in 2P mode for each session. I.e. the tracking resets after closing the game.
+* Press F to enable and disable fast-scrolling in Leaderboard menu.
+* Added sorting to Leaderboard menu.
+* Removed auto-close of round after losing/winning.
+
 **Patch:**
-* Made the speed in two player mode the same as in normal mode.
+* Fixed bug in two player mode, that caused only player no. 1 speed to increase.
+* Swapped starting positions in the two player mode, so that they match the keyboard layout.
+* Decreased the text size in 2P mode by 33%.
+* Fixed not working scroll keys in Leaderboard menu.
 
 ## Versioning:
 

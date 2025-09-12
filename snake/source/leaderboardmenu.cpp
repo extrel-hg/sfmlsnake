@@ -212,7 +212,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector <st
 
 	Button backtomenubutton(font, "Back to menu");
 	Button amountofhighscores(font);
-	Button highscoreframe(font);
+	Button highscoreframe(font,"");
 	Button changesorting(font, "'S' to change");
 
 	Button downbutton(font, "\\/");

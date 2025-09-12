@@ -416,15 +416,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	gamewindow.draw(text);
 	gamewindow.display();
 
-	sf::Clock endclock;
-	sf::Time elapsed;
-
-	elapsed = endclock.getElapsedTime();
-
 	bool go = false;
 	bool skipask = false;
 
-	while (elapsed.asSeconds() <= 7 && !go)
+	while (!go)
 	{
 		sf::Event windowevent;
 		while (gamewindow.pollEvent(windowevent))
@@ -452,7 +447,6 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 				}
 			}
 		}
-		elapsed = endclock.getElapsedTime();
 	}
 
 	if (retcode == 0)

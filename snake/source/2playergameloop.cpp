@@ -724,11 +724,9 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font, int&
 	sf::Clock endclock;
 	sf::Time elapsed;
 
-	elapsed = endclock.getElapsedTime();
-
 	bool go = false;
 
-	while (elapsed.asSeconds() <= 7 && !go)
+	while (!go)
 	{
 		sf::Event windowevent;
 		while (gamewindow.pollEvent(windowevent))
@@ -755,7 +753,6 @@ int twoplayerscreenloopandinit(sf::RenderWindow& gamewindow, sf::Font font, int&
 				}
 			}
 		}
-		elapsed = endclock.getElapsedTime();
 	}
 
 	if (retcode == 0)
