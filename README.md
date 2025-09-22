@@ -1,3 +1,6 @@
+# **IMPORTANT ANNOUCMENT**
+I have recieved reports that on some systems my built .exe triggers anti-virus software. While I have no way to prove my built .exe files are safe, you can look through the code and built the game yourself. **I am working on fixing this issue.**
+
 # V2.1.1.0 - 12.09.2025
 By Hubert Gonera
 
